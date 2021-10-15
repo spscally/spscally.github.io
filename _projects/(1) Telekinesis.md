@@ -1,7 +1,7 @@
 ---
 name: Telekinesis
 tools: [android, productivity]
-image: https://www.sketchappsources.com/resources/source-image/project-neon-groove-music-ui.png
+image: /assets/telekinesis_feature.png
 description: A very unpolished Android app that uses RPG elements to gamify creativity.
 ---
 
