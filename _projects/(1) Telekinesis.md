@@ -1,6 +1,6 @@
 ---
 name: Telekinesis
-tools: [android, productivity]
+tools: [android, flutter, python, aws]
 image: /assets/telekinesis_feature.png
 description: A very unpolished Android app that uses RPG elements to gamify creativity.
 ---
