@@ -2,7 +2,13 @@
     <noscript>This page contains webassembly and javascript content, please enable javascript in your
         browser.</noscript>
     <canvas id="canvas" style="position: fixed"></canvas>
-    <script src="https://dfrduo6mxfnqy.cloudfront.net/bhc/black-hole-cairn.js"></script>
+
+    {% if jekyll.environment == "development" %}
+        <script src="../temp/bhc/black-hole-cairn.js"></script>
+    {% else %}
+        <script src="https://dfrduo6mxfnqy.cloudfront.net/bhc/black-hole-cairn.js"></script>
+    {% endif %}
+
     <script>
         function setSize() {
             const canvas = document.getElementById("canvas");
@@ -13,7 +19,11 @@
         }
 
         window.addEventListener("load", async () => {
-            await wasm_bindgen("https://dfrduo6mxfnqy.cloudfront.net/bhc/black-hole-cairn_bg.wasm");
+            {% if jekyll.environment == "development" %}
+                await wasm_bindgen("../temp/bhc/black-hole-cairn_bg.wasm");
+            {% else %}
+                await wasm_bindgen("https://dfrduo6mxfnqy.cloudfront.net/bhc/black-hole-cairn_bg.wasm");
+            {% endif %}
             setSize();
         });
 
