@@ -1,13 +1,20 @@
 <div>
     <noscript>This page contains webassembly and javascript content, please enable javascript in your
         browser.</noscript>
-    <canvas id="canvas" style="position: fixed"></canvas>
 
     {% if jekyll.environment == "development" %}
-        <script src="../temp/bhc/black-hole-cairn.js"></script>
+    <script src="../temp/bhc/black-hole-cairn.js"></script>
     {% else %}
-        <script src="https://dfrduo6mxfnqy.cloudfront.net/bhc/black-hole-cairn.js"></script>
+    <script src="https://dfrduo6mxfnqy.cloudfront.net/bhc/black-hole-cairn.js"></script>
     {% endif %}
+    
+    <style>
+        #bhc-attribution {
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+    </style>
 
     <script>
         function setSize() {
@@ -16,13 +23,16 @@
             const screenWidth = window.innerWidth;
             const left = (screenWidth - width) / 2;
             canvas.style.left = `${left}px`;
+
+            const bhcWrapper = document.getElementById("bhc-wrapper");
+            bhcWrapper.style.height = `${canvas.height}px`;
         }
 
         window.addEventListener("load", async () => {
             {% if jekyll.environment == "development" %}
-                await wasm_bindgen("../temp/bhc/black-hole-cairn_bg.wasm");
+            await wasm_bindgen("../temp/bhc/black-hole-cairn_bg.wasm");
             {% else %}
-                await wasm_bindgen("https://dfrduo6mxfnqy.cloudfront.net/bhc/black-hole-cairn_bg.wasm");
+            await wasm_bindgen("https://dfrduo6mxfnqy.cloudfront.net/bhc/black-hole-cairn_bg.wasm");
             {% endif %}
             setSize();
         });
@@ -31,4 +41,12 @@
             setSize();
         });
     </script>
+
+    <div id="bhc-wrapper">
+        <canvas id="canvas" style="position: fixed"></canvas>
+    </div>
+
+    <div id="bhc-attribution">
+        Made with code from <a href="https://github.com/amethyst/rustrogueliketutorial">amethyst/rustrogueliketutorial</a>. Thank you to <a href="https://twitter.com/herberticus">@herberticus</a>!
+    </div>
 </div>
